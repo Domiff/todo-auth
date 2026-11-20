@@ -2,7 +2,6 @@ from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings as _BaseSettings, SettingsConfigDict
-from sqlalchemy.engine.url import URL
 
 BASE_DIR: Path = Path(__file__).parent.parent.parent
 
@@ -61,12 +60,17 @@ class RedisSettings(AppSettings):
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
     REDIS_DB: int = 0
+    REDIS_USER: str
+    REDIS_PASSWORD: str
     CONNECTION_POOL_MAXSIZE: int = 10
     EXPIRE: int = 60 * 60
 
     @property
     def url(self) -> str:
-        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
+        return (
+            f"redis://{self.REDIS_USER}:{self.REDIS_PASSWORD}"
+            f"@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
+        )
 
 
 class RabbitMQSettings(AppSettings):
