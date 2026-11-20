@@ -1,7 +1,7 @@
 [project]
 name = "todo-auth"
 version = "0.1.0"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "aio-pika>=10.2.3",
     "alembic>=1.20.0",
@@ -17,3 +17,20 @@ dependencies = [
 
 [tool.fastapi]
 entrypoint = "backend.main:app"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.6",
+]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend"]
+combine-as-imports = true
