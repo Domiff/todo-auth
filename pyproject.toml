@@ -3,6 +3,7 @@ name = "todo-auth"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "aio-pika>=10.2.3",
     "alembic>=1.20.0",
     "asyncpg>=0.32.0",
     "authx>=1.7.1",
