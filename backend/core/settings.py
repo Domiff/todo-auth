@@ -52,8 +52,8 @@ class AuthSettings(BaseSettings):
     JWT_PRIVATE_KEY: Path = BASE_DIR / "keys" / "jwt-private.pem"
     JWT_PUBLIC_KEY: Path = BASE_DIR / "keys" / "jwt-public.pem"
     JWT_ALGORITHM: str = "RS256"
-    JWT_ACCESS_TOKEN_EXPIRES: int = 15
-    JWT_REFRESH_TOKEN_EXPIRES: int = 30
+    JWT_ACCESS_TOKEN_EXPIRES: int = 900
+    JWT_REFRESH_TOKEN_EXPIRES: int = 2_592_000
 
 
 class RedisSettings(AppSettings):
