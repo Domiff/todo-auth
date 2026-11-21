@@ -56,7 +56,7 @@ class AuthSettings(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRES: int = 2_592_000
 
 
-class RedisSettings(AppSettings):
+class RedisSettings(BaseSettings):
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
     REDIS_DB: int = 0
@@ -73,7 +73,7 @@ class RedisSettings(AppSettings):
         )
 
 
-class RabbitMQSettings(AppSettings):
+class RabbitMQSettings(BaseSettings):
     RABBITMQ_USER: str
     RABBITMQ_PASSWORD: str
     RABBITMQ_HOST: str = "localhost"
@@ -87,6 +87,14 @@ class RabbitMQSettings(AppSettings):
         )
 
 
+class UvicornSettings(BaseSettings):
+    UVICORN_HOST: str = "0.0.0.0"
+    UVICORN_PORT: int = 8010
+    UVICORN_PROXY_HEADERS: bool = True
+    UVICORN_FORWARDED_ALLOW_IPS: str = "*"
+    UVICORN_ROOT_PATH: str = ""
+
+
 class Settings:
     app: AppSettings = AppSettings()
     cors: CORSSettings = CORSSettings()
@@ -95,6 +103,7 @@ class Settings:
     auth: AuthSettings = AuthSettings()
     redis: RedisSettings = RedisSettings()
     rabbitmq: RabbitMQSettings = RabbitMQSettings()
+    uvicorn: UvicornSettings = UvicornSettings()
 
 
 settings = Settings()
