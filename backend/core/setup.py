@@ -1,5 +1,5 @@
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import AsyncIterator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,8 +8,8 @@ from backend.admin.setup import setup_admin
 from backend.auth.admin import UserAdmin
 from backend.auth.router import router as auth_router
 from backend.core.errors import setup_auth_errors
-from backend.core.settings import settings
 from backend.core.logging import get_logger, setup_logging
+from backend.core.settings import settings
 
 logger = get_logger(__name__)
 
