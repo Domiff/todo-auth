@@ -1,5 +1,5 @@
 from collections.abc import AsyncIterator
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,6 +10,7 @@ from backend.auth.router import router as auth_router
 from backend.core.errors import setup_auth_errors
 from backend.core.logging import get_logger, setup_logging
 from backend.core.settings import settings
+from backend.infrastructures import rabbitmq
 
 logger = get_logger(__name__)
 
@@ -18,7 +19,11 @@ logger = get_logger(__name__)
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     logger.info("Starting application")
 
-    yield
+    async with AsyncExitStack() as stack:
+        await rabbitmq.connect()
+        stack.push_async_callback(rabbitmq.disconnect)
+
+        yield
 
     logger.info("Stopping application")
 
