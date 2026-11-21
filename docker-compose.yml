@@ -1,0 +1,15 @@
+services:
+  auth:
+    container_name: todo-auth
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./keys:/app/keys:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: todo-network

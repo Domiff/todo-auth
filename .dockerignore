@@ -1,0 +1,38 @@
+# Byte-code files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# Development environment files and directories
+.idea/
+.vscode/
+*.swp
+.git/
+.gitignore
+.ruff_cache/
+.claude/
+
+# Testing and build artifacts
+.pytest_cache/
+htmlcov/
+.mypy_cache/
+.coverage
+
+# Secrets: passed at runtime, never baked into the image
+.env
+keys/
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Docs and templates
+README.md
+.env_template
+.DS_Store
