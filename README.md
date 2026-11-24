@@ -162,6 +162,7 @@ the admin panel through the proxy set `ADMIN_BASE_URL=/auth/admin`.
 | POST   | `/auth/login`    | JSON `{"email", "password"}`                  | `200`, access token in the body, refresh cookie |
 | POST   | `/auth/refresh`  | refresh cookie + `X-CSRF-TOKEN`               | `200`, a new pair; the old refresh is revoked |
 | POST   | `/auth/logout`   | `Authorization` + refresh cookie + `X-CSRF-TOKEN` | `204`, both tokens revoked, cookies cleared |
+| POST   | `/auth/verify`   | `Authorization`                                | `200`, current user |
 
 Response body of register, login and refresh:
 
