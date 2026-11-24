@@ -1,7 +1,12 @@
 from fastapi import APIRouter, Response, status
 
-from backend.auth.depends import AccessTokenDep, AuthServiceDep, RefreshTokenDep
-from backend.auth.schemas import CredentialsSchema
+from backend.auth.depends import (
+    AccessTokenDep,
+    AuthServiceDep,
+    CurrentUserDep,
+    RefreshTokenDep,
+)
+from backend.auth.schemas import CredentialsSchema, UserSchema
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -35,3 +40,8 @@ async def refresh(
     refresh: RefreshTokenDep, service: AuthServiceDep, response: Response
 ):
     return await service.refresh(refresh=refresh, response=response)
+
+
+@router.post("/verify", status_code=status.HTTP_200_OK)
+async def verify(user: CurrentUserDep) -> UserSchema:
+    return UserSchema.model_validate(user)
